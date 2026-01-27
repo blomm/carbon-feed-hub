@@ -9,7 +9,7 @@
     "start:weather-ingester": "tsx src/ingesters/weather.ts",
     "start:logger": "tsx src/consumers/logger.ts",
     "start:aggregator": "tsx src/consumers/aggregator.ts",
-    "setup-topology": "tsx src/lib/setup-topology.ts"
+    "setup-topology": "tsx src/lib/topology.ts"
   },
   "keywords": ["rabbitmq", "typescript", "learning"],
   "author": "",

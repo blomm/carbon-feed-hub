@@ -13,17 +13,17 @@ Checklist for building the UK Carbon + Weather Live Feed Hub MVP.
 
 ## Phase 2: RabbitMQ Infrastructure
 
-- [ ] Create connection manager with auto-reconnect
-- [ ] Create topology setup script (exchanges, queues, bindings)
-- [ ] Verify topology in RabbitMQ Management UI
-- [ ] Test connection recovery (stop/start RabbitMQ)
+- [x] Create connection manager with auto-reconnect
+- [x] Create topology setup script (exchanges, queues, bindings)
+- [x] Verify topology in RabbitMQ Management UI
+- [x] Test connection recovery (stop/start RabbitMQ)
 
 ## Phase 3: Message Envelope
 
-- [ ] Define TypeScript types for message envelope
-- [ ] Define types for carbon intensity message
-- [ ] Define types for weather message
-- [ ] Create envelope factory function (generates ID, timestamp)
+- [x] Define TypeScript types for message envelope
+- [x] Define types for carbon intensity message
+- [x] Define types for weather message
+- [x] Create envelope factory function (generates ID, timestamp)
 
 ## Phase 4: Carbon Intensity Ingester
 
