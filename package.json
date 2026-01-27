@@ -1,0 +1,28 @@
+{
+  "name": "carbon-feed-hub",
+  "version": "1.0.0",
+  "description": "RabbitMQ learning project using UK Carbon Intensity and Weather APIs",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start:carbon-ingester": "tsx src/ingesters/carbon.ts",
+    "start:weather-ingester": "tsx src/ingesters/weather.ts",
+    "start:logger": "tsx src/consumers/logger.ts",
+    "start:aggregator": "tsx src/consumers/aggregator.ts",
+    "setup-topology": "tsx src/lib/setup-topology.ts"
+  },
+  "keywords": ["rabbitmq", "typescript", "learning"],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@types/amqplib": "^0.10.8",
+    "@types/node": "^25.0.10",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "amqplib": "^0.10.9",
+    "dotenv": "^17.2.3"
+  }
+}
