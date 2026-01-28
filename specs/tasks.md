@@ -27,12 +27,12 @@ Checklist for building the UK Carbon + Weather Live Feed Hub MVP.
 
 ## Phase 4: Carbon Intensity Ingester
 
-- [ ] Create HTTP client for Carbon Intensity API
-- [ ] Transform API response to internal message format
-- [ ] Implement polling loop with configurable interval
-- [ ] Publish messages to feeds.topic exchange
-- [ ] Add error handling with exponential backoff
-- [ ] Test with real API data
+- [x] Create HTTP client for Carbon Intensity API
+- [x] Transform API response to internal message format
+- [x] Implement polling loop with configurable interval
+- [x] Publish messages to feeds.topic exchange
+- [x] Add error handling with exponential backoff
+- [x] Test with real API data
 
 ## Phase 5: Weather Ingester
 
