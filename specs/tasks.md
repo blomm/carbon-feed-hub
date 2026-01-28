@@ -36,14 +36,14 @@ Checklist for building the UK Carbon + Weather Live Feed Hub MVP.
 
 ## Phase 5: Weather Ingester
 
-- [ ] Create HTTP client for OpenWeather API
-- [ ] Handle API key configuration
-- [ ] Transform API response to internal message format
-- [ ] Implement polling loop with configurable interval
-- [ ] Publish messages to feeds.topic exchange
-- [ ] Add error handling with exponential backoff
-- [ ] Handle rate limiting (429 responses)
-- [ ] Test with real API data
+- [x] Create HTTP client for OpenWeather API
+- [x] Handle API key configuration
+- [x] Transform API response to internal message format
+- [x] Implement polling loop with configurable interval
+- [x] Publish messages to feeds.topic exchange
+- [x] Add error handling with exponential backoff
+- [x] Handle rate limiting (429 responses)
+- [ ] Test with real API data (requires OPENWEATHER_API_KEY)
 
 ## Phase 6: Logger Consumer
 
