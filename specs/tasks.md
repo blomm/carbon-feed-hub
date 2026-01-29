@@ -43,14 +43,14 @@ Checklist for building the UK Carbon + Weather Live Feed Hub MVP.
 - [x] Publish messages to feeds.topic exchange
 - [x] Add error handling with exponential backoff
 - [x] Handle rate limiting (429 responses)
-- [ ] Test with real API data (requires OPENWEATHER_API_KEY)
+- [x] Test with real API data (requires OPENWEATHER_API_KEY)
 
 ## Phase 6: Logger Consumer
 
-- [ ] Create consumer that binds to feeds.all queue
-- [ ] Implement message acknowledgment
-- [ ] Log received messages with timestamp and routing key
-- [ ] Test fan-out (receives both carbon and weather)
+- [x] Create consumer that binds to feeds.all queue
+- [x] Implement message acknowledgment
+- [x] Log received messages with timestamp and routing key
+- [x] Test fan-out (receives both carbon and weather)
 
 ## Phase 7: Aggregator Consumer
 
