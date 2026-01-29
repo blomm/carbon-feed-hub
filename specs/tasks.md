@@ -54,10 +54,10 @@ Checklist for building the UK Carbon + Weather Live Feed Hub MVP.
 
 ## Phase 7: Aggregator Consumer
 
-- [ ] Create consumer that binds to feeds.carbon queue
-- [ ] Implement prefetch configuration
-- [ ] Process and log carbon intensity data
-- [ ] Demonstrate competing consumers (run 2 instances)
+- [x] Create consumer that binds to feeds.carbon queue
+- [x] Implement prefetch configuration
+- [x] Process and log carbon intensity data
+- [x] Demonstrate competing consumers (run 2 instances)
 
 ## Phase 8: Error Handling & DLQ
 
