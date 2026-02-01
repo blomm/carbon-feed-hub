@@ -9,6 +9,14 @@ import {
   WeatherCurrentData,
   MESSAGE_TYPES,
 } from '../lib/messages';
+import {
+  getRetryCount,
+  shouldRetry,
+  republishWithRetry,
+  classifyError,
+  ErrorType,
+  MAX_RETRY_ATTEMPTS,
+} from '../lib/retry';
 
 // ============================================================================
 // State
@@ -65,9 +73,27 @@ function handleMessage(msg: ConsumeMessage | null): void {
     // Acknowledge the message
     channel.ack(msg);
   } catch (error) {
-    console.error('[Logger] Failed to process message:', (error as Error).message);
-    // Reject without requeue on parse errors (message is malformed)
-    channel.nack(msg, false, false);
+    const err = error as Error;
+    const retryCount = getRetryCount(msg);
+
+    if (shouldRetry(msg, err)) {
+      console.log(
+        `[Logger] Transient error (attempt ${retryCount + 1}/${MAX_RETRY_ATTEMPTS}), requeueing: ${err.message}`
+      );
+      try {
+        republishWithRetry(channel, msg);
+        channel.ack(msg);
+      } catch (republishError) {
+        console.error('[Logger] Failed to republish, sending to DLQ:', (republishError as Error).message);
+        channel.nack(msg, false, false);
+      }
+    } else {
+      const errorType = classifyError(err);
+      const reason = errorType === ErrorType.PERMANENT ? 'Permanent error' : 'Max retries exceeded';
+      console.error(`[Logger] ${reason}, sending to DLQ: ${err.message}`);
+      console.error(`[Logger] Message ID: ${msg.properties.messageId}, Retry count: ${retryCount}`);
+      channel.nack(msg, false, false);
+    }
   }
 }
 

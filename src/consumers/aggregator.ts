@@ -8,6 +8,14 @@ import {
   CarbonGenerationData,
   MESSAGE_TYPES,
 } from '../lib/messages';
+import {
+  getRetryCount,
+  shouldRetry,
+  republishWithRetry,
+  classifyError,
+  ErrorType,
+  MAX_RETRY_ATTEMPTS,
+} from '../lib/retry';
 
 // ============================================================================
 // Consumer Identity (unique per instance for competing consumer demo)
@@ -66,8 +74,27 @@ function handleMessage(msg: ConsumeMessage | null): void {
 
     channel.ack(msg);
   } catch (error) {
-    console.error(`[${CONSUMER_ID}] Failed to process message:`, (error as Error).message);
-    channel.nack(msg, false, false);
+    const err = error as Error;
+    const retryCount = getRetryCount(msg);
+
+    if (shouldRetry(msg, err)) {
+      console.log(
+        `[${CONSUMER_ID}] Transient error (attempt ${retryCount + 1}/${MAX_RETRY_ATTEMPTS}), requeueing: ${err.message}`
+      );
+      try {
+        republishWithRetry(channel, msg);
+        channel.ack(msg);
+      } catch (republishError) {
+        console.error(`[${CONSUMER_ID}] Failed to republish, sending to DLQ:`, (republishError as Error).message);
+        channel.nack(msg, false, false);
+      }
+    } else {
+      const errorType = classifyError(err);
+      const reason = errorType === ErrorType.PERMANENT ? 'Permanent error' : 'Max retries exceeded';
+      console.error(`[${CONSUMER_ID}] ${reason}, sending to DLQ: ${err.message}`);
+      console.error(`[${CONSUMER_ID}] Message ID: ${msg.properties.messageId}, Retry count: ${retryCount}`);
+      channel.nack(msg, false, false);
+    }
   }
 }
 

@@ -61,11 +61,11 @@ Checklist for building the UK Carbon + Weather Live Feed Hub MVP.
 
 ## Phase 8: Error Handling & DLQ
 
-- [ ] Implement retry count tracking via message headers
-- [ ] Add nack with requeue for transient errors
-- [ ] Add nack without requeue after max retries
-- [ ] Create DLQ inspector (view failed messages)
-- [ ] Test poison message scenario
+- [x] Implement retry count tracking via message headers
+- [x] Add nack with requeue for transient errors
+- [x] Add nack without requeue after max retries
+- [x] Create DLQ inspector (view failed messages)
+- [x] Test poison message scenario
 
 ## Phase 9: Idempotency
 
